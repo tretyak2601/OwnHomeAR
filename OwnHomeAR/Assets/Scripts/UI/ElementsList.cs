@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using OwnHomeAR.Gameplay;
 using UnityEngine.UI;
+using System;
 
 namespace OwnHomeAR.UI
 {
@@ -11,18 +12,26 @@ namespace OwnHomeAR.UI
     {
         [SerializeField] RectTransform rect;
         [SerializeField] ScrollRect scroll;
+        [SerializeField] ElementCell cell;
 
-        List<Element> elementsList = new List<Element>();
+        List<ElementCell> elementsList = new List<ElementCell>();
 
         void Awake()
         {
             PanelHolder.OnToggleClicekd += () => rect.gameObject.SetActive(false);
         }
 
-        public void Init(List<Element> elements, float anchPosX, int inc)
+        public void Init(List<Element> elements, float anchPosX, int inc, ElementEnum type)
         {
             Clear();
             rect.gameObject.SetActive(true);
+
+            for (int i = 0; i < 7; i++)
+            {
+                var tempCell = Instantiate(cell, scroll.content);
+                tempCell.Init(type, () => rect.gameObject.SetActive(false));
+                elementsList.Add(tempCell);
+            }
 
             rect.anchoredPosition = new Vector2(anchPosX * 2 + Screen.currentResolution.height * inc, 0);
 

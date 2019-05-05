@@ -208,6 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd801bb545044c43b8b11ed351e159e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Checkmark: {fileID: 6750251525636278736}
 --- !u!114 &3553214221130383006
 MonoBehaviour:
   m_ObjectHideFlags: 0

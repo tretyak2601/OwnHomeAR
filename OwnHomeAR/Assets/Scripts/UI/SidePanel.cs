@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using OwnHomeAR.Gameplay;
 
 namespace OwnHomeAR.UI
 {
@@ -15,6 +16,7 @@ namespace OwnHomeAR.UI
 
         public ToggleGroup Group { get; private set; }
         public RectTransform Rect { get; private set; }
+        protected ElementsList ListPanel { get { return listPanel; } }
 
         private void Awake()
         {
@@ -27,17 +29,19 @@ namespace OwnHomeAR.UI
             foreach(ElementEnum type in Enum.GetValues(typeof(ElementEnum)))
             {
                 var tempGroup = Instantiate(groupPrefab, scroll.content);
-                tempGroup.Init(ShowGroup, type, Group);
+                tempGroup.Init(flag => ShowGroup(flag, type), type, Group);
             }
         }
 
-        void ShowGroup(bool isOn)
+        protected virtual void ShowGroup(bool isOn, ElementEnum type)
         {
             if (!isOn)
                 return;
 
             int inc = Rect.anchoredPosition.x > 0 ? -1 : 1;
-            listPanel.Init(null, Rect.anchoredPosition.x, inc);
+            InitPanel(Rect.anchoredPosition.x, inc, type);
         }
+
+        protected abstract void InitPanel(float anchorPosX, int inc, ElementEnum type);
     }
 }

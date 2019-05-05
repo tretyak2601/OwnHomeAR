@@ -25,7 +25,12 @@ namespace OwnHomeAR.UI
 
         protected void Move(bool isOn)
         {
+            panel.Group.allowSwitchOff = !isOn;
             OnToggleClicekd?.Invoke();
+
+            if (!isOn) 
+                foreach (var t in panel.Group.ActiveToggles())
+                    t.isOn = false;
 
             switch (direct)
             {
