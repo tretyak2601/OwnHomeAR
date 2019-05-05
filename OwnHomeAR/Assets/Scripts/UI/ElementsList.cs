@@ -13,6 +13,7 @@ namespace OwnHomeAR.UI
         [SerializeField] RectTransform rect;
         [SerializeField] ScrollRect scroll;
         [SerializeField] ElementCell cell;
+        [SerializeField] ARController AR;
 
         List<ElementCell> elementsList = new List<ElementCell>();
 
@@ -21,15 +22,15 @@ namespace OwnHomeAR.UI
             PanelHolder.OnToggleClicekd += () => rect.gameObject.SetActive(false);
         }
 
-        public void Init(List<Element> elements, float anchPosX, int inc, ElementEnum type)
+        public void Init(List<Element> elements, float anchPosX, int inc)
         {
             Clear();
             rect.gameObject.SetActive(true);
 
-            for (int i = 0; i < 7; i++)
+            foreach(var e in elements)
             {
                 var tempCell = Instantiate(cell, scroll.content);
-                tempCell.Init(type, () => rect.gameObject.SetActive(false));
+                tempCell.Init(e.Sprite, () => Implement(e));
                 elementsList.Add(tempCell);
             }
 
@@ -48,6 +49,12 @@ namespace OwnHomeAR.UI
             rect.anchoredPosition = Vector2.zero;
             elementsList.ForEach(elm => Destroy(elm.gameObject));
             elementsList.Clear();
+        }
+
+        void Implement(Element e)
+        {
+            rect.gameObject.SetActive(false);
+            AR.Activate(true, e);
         }
     }
 }

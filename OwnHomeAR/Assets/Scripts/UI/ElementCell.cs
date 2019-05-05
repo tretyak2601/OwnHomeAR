@@ -19,7 +19,6 @@ namespace OwnHomeAR.UI
         public Button Button { get; private set; }
 
         public event Action<Vector2> OnElementChoosed;
-        Element element;
 
         void Awake()
         {
@@ -27,9 +26,9 @@ namespace OwnHomeAR.UI
             Button = GetComponent<Button>();
         }
 
-        public void Init(ElementEnum type, UnityAction action)
+        public void Init(Sprite spr, UnityAction action)
         {
-            Image.sprite = Array.Find(ElementsTypes.Instance.Types, t => t.Type == type).Sprite;
+            Image.sprite = spr;
             Button.onClick.AddListener(action);
         }
     }

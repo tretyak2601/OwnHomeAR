@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace OwnHomeAR.Gameplay
 {
-    public class Element : MonoBehaviour
+    public class Floor : Element
     {
-        public Sprite Sprite;
+
     }
 }

@@ -13,6 +13,7 @@ namespace OwnHomeAR.UI
         [SerializeField] ElementsList listPanel;
         [SerializeField] GroupPrefab groupPrefab;
         [SerializeField] ScrollRect scroll;
+        [SerializeField] ElementsPack[] packs;
 
         public ToggleGroup Group { get; private set; }
         public RectTransform Rect { get; private set; }
@@ -29,19 +30,27 @@ namespace OwnHomeAR.UI
             foreach(ElementEnum type in Enum.GetValues(typeof(ElementEnum)))
             {
                 var tempGroup = Instantiate(groupPrefab, scroll.content);
-                tempGroup.Init(flag => ShowGroup(flag, type), type, Group);
+                tempGroup.Init(flag => ShowGroup(flag, Array.Find(packs, pack => type == pack.Type).elements), type, Group);
             }
         }
 
-        protected virtual void ShowGroup(bool isOn, ElementEnum type)
+        protected virtual void ShowGroup(bool isOn, List<Element> elements)
         {
             if (!isOn)
                 return;
 
             int inc = Rect.anchoredPosition.x > 0 ? -1 : 1;
-            InitPanel(Rect.anchoredPosition.x, inc, type);
+            listPanel.Init(elements, Rect.anchoredPosition.x, inc);
         }
+    }
 
-        protected abstract void InitPanel(float anchorPosX, int inc, ElementEnum type);
+    [Serializable]
+    class ElementsPack
+    {
+        [SerializeField] ElementEnum type;
+        [SerializeField] public List<Element> elements;
+
+        public ElementEnum Type { get { return type; } }
+        public List<Element> Elements { get { return elements; } }
     }
 }

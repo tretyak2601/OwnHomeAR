@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OwnHomeAR.Gameplay;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace OwnHomeAR.UI
     public class GroupPrefab : ToggleHolder
     {
         [SerializeField] Image Checkmark;
+        List<Element> elementItems;
 
         public void Init(UnityAction<bool> action, ElementEnum type, ToggleGroup group)
         {

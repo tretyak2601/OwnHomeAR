@@ -3,19 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 
-public class ARController : MonoBehaviour
-{
-    [SerializeField] ARSessionOrigin session;
-    [SerializeField] GameObject planePrefab;
-
-    private void Awake()
+namespace OwnHomeAR.Gameplay {
+    public class ARController : MonoBehaviour
     {
-        ARSubsystemManager.planeAdded += PlaneAddedHandler;
-    }
+        [SerializeField] ARSessionOrigin session;
 
-    private void PlaneAddedHandler(UnityEngine.Experimental.XR.PlaneAddedEventArgs obj)
-    {
-        ARSubsystemManager.planeAdded -= PlaneAddedHandler;
-        Instantiate(planePrefab, obj.Plane.Pose.position, Quaternion.identity);
+        public Element ElementPrefab { get; set; }
+
+        public void Activate(bool flag, Element prefab)
+        {
+            ElementPrefab = prefab;
+            ARSubsystemManager.planeAdded += PlaneAddedHandler;
+        }
+
+        private void PlaneAddedHandler(UnityEngine.Experimental.XR.PlaneAddedEventArgs obj)
+        {
+            ARSubsystemManager.planeAdded -= PlaneAddedHandler;
+            Instantiate(ElementPrefab, obj.Plane.Pose.position, Quaternion.identity);
+        }
+
+        public void Test()
+        {
+            Instantiate(ElementPrefab, Vector3.zero, Quaternion.identity);
+        }
     }
 }

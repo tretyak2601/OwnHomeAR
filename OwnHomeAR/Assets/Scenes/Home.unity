@@ -696,7 +696,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &414704086
 Transform:
   m_ObjectHideFlags: 0
@@ -726,8 +726,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   session: {fileID: 124085042}
-  planePrefab: {fileID: 4620697503858682308, guid: 8479dbffcc4f86541a278545f9097bec,
-    type: 3}
 --- !u!1 &424791984
 GameObject:
   m_ObjectHideFlags: 0
@@ -810,7 +808,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.0000044476915, y: -0.00011562851}
+  m_AnchoredPosition: {x: 0.0000044476915, y: -0.0002704247}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &470886015
@@ -941,7 +939,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &534669903
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1408,7 +1406,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0000031634304, y: -0.000022324008}
+  m_AnchoredPosition: {x: -0.0000031634304, y: -0.000029343912}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1216499972
@@ -1541,6 +1539,7 @@ MonoBehaviour:
   groupPrefab: {fileID: 5996764998421093273, guid: 0d69e3647ea1f634193783b2aba4d897,
     type: 3}
   scroll: {fileID: 962550452}
+  packs: []
 --- !u!114 &1294967858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1647,7 +1646,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1399561708
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1711,9 +1710,9 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 414704084}
-        m_MethodName: SetActive
-        m_Mode: 0
+      - m_Target: {fileID: 414704087}
+        m_MethodName: Test
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1921,6 +1920,13 @@ MonoBehaviour:
   groupPrefab: {fileID: 5996764998421093273, guid: 0d69e3647ea1f634193783b2aba4d897,
     type: 3}
   scroll: {fileID: 74204312}
+  packs:
+  - type: 0
+    elements:
+    - {fileID: 5545927788338402826, guid: a9c384f1b4630d54995c022c336a1376, type: 3}
+    - {fileID: 1475250001303399766, guid: 9dee79dfd03ff5241ad22f55d2a831b3, type: 3}
+  - type: 1
+    elements: []
 --- !u!114 &1816881994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2139,6 +2145,7 @@ MonoBehaviour:
   rect: {fileID: 1860100538}
   scroll: {fileID: 239950886}
   cell: {fileID: 4039351524698768356, guid: 0cda787ae6fefc54280e2f77b7473db5, type: 3}
+  AR: {fileID: 414704087}
 --- !u!222 &1854660535
 CanvasRenderer:
   m_ObjectHideFlags: 0
