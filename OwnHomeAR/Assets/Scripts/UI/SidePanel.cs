@@ -13,7 +13,9 @@ namespace OwnHomeAR.UI
         [SerializeField] ElementsList listPanel;
         [SerializeField] GroupPrefab groupPrefab;
         [SerializeField] ScrollRect scroll;
-        [SerializeField] ElementsPack[] packs;
+
+        [SerializeField] FloorPack floorPack;
+        [SerializeField] FurniturePack furniturePack;
 
         public ToggleGroup Group { get; private set; }
         public RectTransform Rect { get; private set; }
@@ -29,12 +31,21 @@ namespace OwnHomeAR.UI
         {
             foreach(ElementEnum type in Enum.GetValues(typeof(ElementEnum)))
             {
-                var tempGroup = Instantiate(groupPrefab, scroll.content);
-                tempGroup.Init(flag => ShowGroup(flag, Array.Find(packs, pack => type == pack.Type).elements), type, Group);
+                GroupPrefab tempGroup = Instantiate(groupPrefab, scroll.content);
+
+                switch (type)
+                {
+                    case ElementEnum.Floor:
+                        tempGroup.Init(flag => ShowGroup(flag, floorPack.Elements), type, Group);
+                        break;
+                    case ElementEnum.Furniture:
+                        tempGroup.Init(flag => ShowGroup(flag, furniturePack.Elements), type, Group);
+                        break;
+                }
             }
         }
 
-        protected virtual void ShowGroup(bool isOn, List<Element> elements)
+        protected virtual void ShowGroup<T>(bool isOn, List<T> elements) where T : ElementUI
         {
             if (!isOn)
                 return;
@@ -42,15 +53,5 @@ namespace OwnHomeAR.UI
             int inc = Rect.anchoredPosition.x > 0 ? -1 : 1;
             listPanel.Init(elements, Rect.anchoredPosition.x, inc);
         }
-    }
-
-    [Serializable]
-    class ElementsPack
-    {
-        [SerializeField] ElementEnum type;
-        [SerializeField] public List<Element> elements;
-
-        public ElementEnum Type { get { return type; } }
-        public List<Element> Elements { get { return elements; } }
     }
 }

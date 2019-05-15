@@ -7,6 +7,6 @@ namespace OwnHomeAR.UI
     public enum ElementEnum
     {
         Floor,
-        Chair
+        Furniture
     }
 }

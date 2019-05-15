@@ -15,6 +15,9 @@ namespace OwnHomeAR.UI
         [SerializeField] ElementCell cell;
         [SerializeField] ARController AR;
 
+        [SerializeField] Floor floorPrefab;
+        [SerializeField] Furniture furniturePrefab;
+
         List<ElementCell> elementsList = new List<ElementCell>();
 
         void Awake()
@@ -22,7 +25,7 @@ namespace OwnHomeAR.UI
             PanelHolder.OnToggleClicekd += () => rect.gameObject.SetActive(false);
         }
 
-        public void Init(List<Element> elements, float anchPosX, int inc)
+        public void Init<T>(List<T> elements, float anchPosX, int inc) where T : ElementUI
         {
             Clear();
             rect.gameObject.SetActive(true);
@@ -51,10 +54,25 @@ namespace OwnHomeAR.UI
             elementsList.Clear();
         }
 
-        void Implement(Element e)
+        void Implement(ElementUI e)
         {
             rect.gameObject.SetActive(false);
-            AR.Activate(true, e);
+            SwitchElement(e);
+        }
+
+        void SwitchElement(ElementUI eUI)
+        {
+            switch (eUI.Type)
+            {
+                case ElementEnum.Floor:
+                    FloorUI fUI = eUI as FloorUI;
+                    AR.Activate(true, floorPrefab, fUI.FloorTexture);
+                    break;
+                case ElementEnum.Furniture:
+                    FurnitureUI furUI = eUI as FurnitureUI;
+                    AR.Activate(true, furniturePrefab, furUI.Model);
+                    break;
+            }
         }
     }
 }
