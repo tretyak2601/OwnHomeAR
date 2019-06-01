@@ -10,10 +10,10 @@ namespace OwnHomeAR.Gameplay
         [SerializeField] float scaleSpeed = 6;
 
         Transform parent;
-        const short FULL_SIZE = 1;
-        const float STANDART_SIZE = 0.1f;
+        const float FULL_SIZE = 1f;
+        const float STANDART_SIZE = 1f;
         const float BORDER_POSITION = 5f;
-        const float FEW_UP = 0.01f;
+        const float FEW_UP = 0.1f;
 
         Vector3 lastPos;
         Vector3 deltaPos;
@@ -33,11 +33,11 @@ namespace OwnHomeAR.Gameplay
                     transform.localPosition = new Vector3(BORDER_POSITION, FEW_UP, 0);
                     break;
                 case BorderPosition.Up:
-                    transform.localScale = new Vector3(FULL_SIZE, STANDART_SIZE, 0.1f / parent.localScale.z);
+                    transform.localScale = new Vector3(FULL_SIZE, STANDART_SIZE, FEW_UP / parent.localScale.z);
                     transform.localPosition = new Vector3(0, FEW_UP, BORDER_POSITION);
                     break;
                 case BorderPosition.Down:
-                    transform.localScale = new Vector3(FULL_SIZE, STANDART_SIZE, 0.1f / parent.localScale.z);
+                    transform.localScale = new Vector3(FULL_SIZE, STANDART_SIZE, FEW_UP / parent.localScale.z);
                     transform.localPosition = new Vector3(0, FEW_UP, -BORDER_POSITION);
                     break;
                 case BorderPosition.Left:
@@ -58,28 +58,28 @@ namespace OwnHomeAR.Gameplay
             float delta = default;
             deltaPos = Input.mousePosition - lastPos;
             lastPos = Input.mousePosition;
-
+            
             switch (borderPos)
             {
                 case BorderPosition.Up:
                     delta = deltaPos.y;
-                    parent.localScale += new Vector3(0, 0, delta * Time.deltaTime / scaleSpeed);
-                    parent.position += new Vector3(0, delta * Time.deltaTime / (scaleSpeed / 5), 0);
+                    parent.localScale += new Vector3(0, 0, delta  / scaleSpeed);
+                    parent.localPosition += new Vector3(0, 0, delta / (scaleSpeed / 5));
                     break;
                 case BorderPosition.Down:
                     delta = deltaPos.y;
-                    parent.localScale -= new Vector3(0, 0, delta * Time.deltaTime / scaleSpeed);
-                    parent.position += new Vector3(0, delta * Time.deltaTime / (scaleSpeed / 5), 0);
+                    parent.localScale -= new Vector3(0, 0, delta / scaleSpeed);
+                    parent.localPosition += new Vector3(0, 0, delta  / (scaleSpeed / 5));
                     break;
                 case BorderPosition.Right:
                     delta = deltaPos.x;
-                    parent.localScale += new Vector3(delta * Time.deltaTime / scaleSpeed, 0, 0);
-                    parent.position += new Vector3(delta * Time.deltaTime / (scaleSpeed / 5), 0, 0);
+                    parent.localScale += new Vector3(delta  / scaleSpeed, 0, 0);
+                    parent.localPosition += new Vector3(delta  / (scaleSpeed / 5), 0, 0);
                     break;
                 case BorderPosition.Left:
                     delta = deltaPos.x;
-                    parent.localScale -= new Vector3(delta * Time.deltaTime / scaleSpeed, 0, 0);
-                    parent.position += new Vector3(delta * Time.deltaTime / (scaleSpeed / 5), 0, 0);
+                    parent.localScale -= new Vector3(delta  / scaleSpeed, 0, 0);
+                    parent.localPosition += new Vector3(delta / (scaleSpeed / 5), 0, 0);
                     break;
             }
         }

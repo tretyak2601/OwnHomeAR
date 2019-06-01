@@ -464,7 +464,7 @@ MonoBehaviour:
   secondClickTime: 0.25
   showMenu: {fileID: 2062879566484146598}
   Sprite: {fileID: 21300000, guid: 8c97687116be9634799e3d8da46c7f4b, type: 3}
-  scaleSpeed: 6
+  scaleSpeed: 1000
   borders:
   - {fileID: 7370987803196352046}
   - {fileID: 77809695148692898}
