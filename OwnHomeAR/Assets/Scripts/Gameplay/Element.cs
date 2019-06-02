@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,12 +9,13 @@ namespace OwnHomeAR.Gameplay
     public abstract class Element : MonoBehaviour
     {
         [SerializeField] float secondClickTime = 0.25f;
-        [SerializeField] GameObject showMenu;
 
         public Sprite Sprite;
 
         bool isMenuShown = default;
         Coroutine WaitForSecondClick;
+        Action<bool> ShowMenuAction;
+        Transform parentScale;
 
         private void OnMouseDown()
         {
@@ -26,7 +28,7 @@ namespace OwnHomeAR.Gameplay
         public virtual void ShowMenu(bool flag)
         {
             isMenuShown = flag;
-            showMenu.SetActive(isMenuShown);
+            ShowMenuAction?.Invoke(isMenuShown);
         }
 
         IEnumerator WaitClick()
@@ -35,6 +37,10 @@ namespace OwnHomeAR.Gameplay
             WaitForSecondClick = null;
         }
 
-        public abstract void InitElement(Object obj);
+        public virtual void InitElement(UnityEngine.Object obj, Action<bool> showMenuAction, Transform parentScale)
+        {
+            ShowMenuAction = showMenuAction;
+            this.parentScale = parentScale;
+        }
     }
 }

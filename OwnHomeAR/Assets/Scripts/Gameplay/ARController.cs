@@ -6,11 +6,15 @@ using OwnHomeAR.UI;
 using UnityEngine.Events;
 using System;
 using UnityEngine.Experimental.XR;
+using OwnHomeAR.ObjectControllers;
 
 namespace OwnHomeAR.Gameplay
 {
     public class ARController : MonoBehaviour
     {
+        [SerializeField] ScaleController scale;
+
+        [SerializeField] GameObject helpMenu;
         [SerializeField] ARSessionOrigin session;
         [SerializeField] Helper navigatePrefab;
         Helper Navigate;
@@ -64,17 +68,6 @@ namespace OwnHomeAR.Gameplay
             }
         }
 
-        public void Test()
-        {
-            GameObject parent = new GameObject("parent");
-            parent.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-
-            var fl = Instantiate(ElementPrefab, Vector3.zero, Quaternion.identity, parent.transform);
-            fl.InitElement(elementObject);
-            fl.transform.localEulerAngles = new Vector3(-90, 0, 0);
-            fl.transform.localPosition = new Vector3(0, 0, 30);
-        }
-
         IEnumerator SetPositionHelper()
         {
             while (true)
@@ -110,7 +103,11 @@ namespace OwnHomeAR.Gameplay
             parent.transform.position = position; //obj.Plane.Pose.position;
             parent.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 
-            Instantiate(ElementPrefab, position, Quaternion.identity, parent.transform).InitElement(elementObject);
+            var temp = Instantiate(ElementPrefab, position, Quaternion.identity, parent.transform);
+            temp.InitElement(elementObject, ShowMenu, parent.transform);
+            scale.InitController(parent.transform, temp);
         }
+
+        void ShowMenu(bool flag) => helpMenu.SetActive(flag);
     }
 }

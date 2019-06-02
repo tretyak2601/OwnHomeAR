@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,8 +40,10 @@ namespace OwnHomeAR.Gameplay
                 b.InitBorder(transform, scaleSpeed);
         }
 
-        public override void InitElement(Object obj)
+        public override void InitElement(UnityEngine.Object obj, Action<bool> showMenuAction, Transform parentScale)
         {
+            base.InitElement(obj, showMenuAction, parentScale);
+
             Texture2D texture = obj as Texture2D;
             Material mat = new Material(mesh.sharedMaterial);
             mesh.material = mat;
