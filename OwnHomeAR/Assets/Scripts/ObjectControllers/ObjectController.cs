@@ -28,8 +28,10 @@ namespace OwnHomeAR.ObjectControllers
             if (!toggle.isOn)
                 return;
 
-            if (Input.touchCount == 2)
+            if (Input.touchCount == 2 && GetType() == typeof(ScaleController))
                 Controll(Input.GetTouch(0), Input.GetTouch(1));
+            else if(Input.touchCount == 1 && (GetType() == typeof(RotateController) || GetType() == typeof(MoveController)))
+                Controll(Input.GetTouch(0), Input.GetTouch(0));
             else
             {
                 deltaStart = 0;

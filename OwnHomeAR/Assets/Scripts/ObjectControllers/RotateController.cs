@@ -8,7 +8,10 @@ namespace OwnHomeAR.ObjectControllers
     {
         protected override void Controll(Touch touch1, Touch touch2)
         {
-
+            float rotateSpeed = 0.09f;
+            Vector3 localAngle = controlledObject.localEulerAngles;
+            localAngle.y -= rotateSpeed * touch1.deltaPosition.x;
+            controlledObject.transform.localEulerAngles = localAngle;
         }
     }
 }

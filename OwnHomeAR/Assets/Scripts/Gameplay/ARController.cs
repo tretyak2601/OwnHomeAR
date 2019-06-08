@@ -13,6 +13,8 @@ namespace OwnHomeAR.Gameplay
     public class ARController : MonoBehaviour
     {
         [SerializeField] ScaleController scale;
+        [SerializeField] RotateController rotate;
+        [SerializeField] MoveController move;
 
         [SerializeField] GameObject helpMenu;
         [SerializeField] ARSessionOrigin session;
@@ -106,6 +108,8 @@ namespace OwnHomeAR.Gameplay
             var temp = Instantiate(ElementPrefab, position, Quaternion.identity, parent.transform);
             temp.InitElement(elementObject, ShowMenu, parent.transform);
             scale.InitController(parent.transform, temp);
+            rotate.InitController(parent.transform, temp);
+            move.InitController(parent.transform, temp);
         }
 
         void ShowMenu(bool flag) => helpMenu.SetActive(flag);
