@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using OwnHomeAR.ObjectControllers;
+using OwnHomeAR.UI;
 
 namespace OwnHomeAR.Gameplay
 {
@@ -17,6 +19,10 @@ namespace OwnHomeAR.Gameplay
         Action<bool> ShowMenuAction;
         Transform parentScale;
 
+        ScaleController scale;
+        MoveController move;
+        RotateController rotate;
+
         private void OnMouseDown()
         {
             if (WaitForSecondClick == null)
@@ -29,6 +35,10 @@ namespace OwnHomeAR.Gameplay
         {
             isMenuShown = flag;
             ShowMenuAction?.Invoke(isMenuShown);
+
+            scale.InitController(parentScale, this);
+            rotate.InitController(parentScale, this);
+            move.InitController(parentScale, this);
         }
 
         IEnumerator WaitClick()
@@ -37,10 +47,13 @@ namespace OwnHomeAR.Gameplay
             WaitForSecondClick = null;
         }
 
-        public virtual void InitElement(UnityEngine.Object obj, Action<bool> showMenuAction, Transform parentScale)
+        public virtual void InitElement(UnityEngine.Object obj, Action<bool> showMenuAction, Transform parentScale, ControllesMenu.Controllers control)
         {
             ShowMenuAction = showMenuAction;
             this.parentScale = parentScale;
+            scale = control.Scale;
+            rotate = control.Rotate;
+            move = control.Move;
         }
     }
 }

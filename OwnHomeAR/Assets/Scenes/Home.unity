@@ -972,9 +972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de66c5a23eb67f04fb8a6c96d29f1b26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: {fileID: 1777067872}
-  rotate: {fileID: 1864133054}
-  move: {fileID: 134194084}
+  controlMenu: {fileID: 1711202467}
   helpMenu: {fileID: 1711202463}
   session: {fileID: 124085042}
   navigatePrefab: {fileID: 5056786250957740318, guid: ca1af376c0ba4bd4e979e05ca12f4125,
@@ -1061,7 +1059,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.0000044476915, y: -0.00017129844}
+  m_AnchoredPosition: {x: 0.0000044476915, y: -0.00021613514}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &470886015
@@ -1604,7 +1602,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: c43e25b3eaa7ea041909813cb7954858, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 59ed16a3eb60664448d6b7d9425290d1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1905,7 +1903,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: c43e25b3eaa7ea041909813cb7954858, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 59ed16a3eb60664448d6b7d9425290d1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1956,7 +1954,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0000031634304, y: 0.000010801206}
+  m_AnchoredPosition: {x: -0.0000031634304, y: -0.000040082265}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1216499972
@@ -2393,6 +2391,7 @@ GameObject:
   - component: {fileID: 1711202464}
   - component: {fileID: 1711202465}
   - component: {fileID: 1711202466}
+  - component: {fileID: 1711202467}
   m_Layer: 5
   m_Name: MENU
   m_TagString: Untagged
@@ -2458,6 +2457,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AllowSwitchOff: 1
+--- !u!114 &1711202467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1711202463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d03cd6f5955646542adb503304cec089, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllers:
+    rotate: {fileID: 1864133054}
+    move: {fileID: 134194084}
+    scale: {fileID: 1777067872}
+  toggles:
+  - {fileID: 1864133053}
+  - {fileID: 1777067871}
+  - {fileID: 134194085}
 --- !u!1 &1777067869
 GameObject:
   m_ObjectHideFlags: 0
@@ -2658,7 +2677,15 @@ MonoBehaviour:
       floorTexture: {fileID: 2800000, guid: 2ea3f29413034a84f883672d9363a423, type: 3}
   furniturePack:
     type: 1
-    elements: []
+    elements:
+    - type: 1
+      sprite: {fileID: 21300000, guid: 91b36528e965c614092a3e2a5c5d04c4, type: 3}
+      model: {fileID: 4323260882955536999, guid: ab3ab38ccbbdf4f4e9846816bcab3a4b,
+        type: 3}
+    - type: 1
+      sprite: {fileID: 21300000, guid: b6f06352b8322af43b554331af33157d, type: 3}
+      model: {fileID: 522883897986463626, guid: fee4854a6f40431449ca1485cffe1534,
+        type: 3}
 --- !u!114 &1816881994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2881,7 +2908,8 @@ MonoBehaviour:
   AR: {fileID: 414704087}
   floorPrefab: {fileID: 5545927788338402826, guid: a9c384f1b4630d54995c022c336a1376,
     type: 3}
-  furniturePrefab: {fileID: 0}
+  furniturePrefab: {fileID: 4323260882955536999, guid: ab3ab38ccbbdf4f4e9846816bcab3a4b,
+    type: 3}
 --- !u!222 &1854660535
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3050,7 +3078,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1927997016
 RectTransform:
   m_ObjectHideFlags: 0

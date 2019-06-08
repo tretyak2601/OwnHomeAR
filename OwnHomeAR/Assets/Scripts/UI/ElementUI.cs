@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OwnHomeAR.Gameplay;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,7 +26,7 @@ namespace OwnHomeAR.UI
     [Serializable]
     public class FurnitureUI : ElementUI
     {
-        [SerializeField] GameObject model;
-        public GameObject Model { get { return model; } }
+        [SerializeField] Furniture model;
+        public Furniture Model { get { return model; } }
     }
 }

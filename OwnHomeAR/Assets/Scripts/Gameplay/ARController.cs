@@ -12,9 +12,7 @@ namespace OwnHomeAR.Gameplay
 {
     public class ARController : MonoBehaviour
     {
-        [SerializeField] ScaleController scale;
-        [SerializeField] RotateController rotate;
-        [SerializeField] MoveController move;
+        [SerializeField] ControllesMenu controlMenu;
 
         [SerializeField] GameObject helpMenu;
         [SerializeField] ARSessionOrigin session;
@@ -29,6 +27,10 @@ namespace OwnHomeAR.Gameplay
 
         public void Activate(bool flag, Element el, UnityEngine.Object obj)
         {
+#if UNITY_EDITOR
+            Instantiate(el);
+#endif
+
             FindPlane = true;
             ElementPrefab = el;
             elementObject = obj;
@@ -106,10 +108,7 @@ namespace OwnHomeAR.Gameplay
             parent.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 
             var temp = Instantiate(ElementPrefab, position, Quaternion.identity, parent.transform);
-            temp.InitElement(elementObject, ShowMenu, parent.transform);
-            scale.InitController(parent.transform, temp);
-            rotate.InitController(parent.transform, temp);
-            move.InitController(parent.transform, temp);
+            temp.InitElement(elementObject, ShowMenu, parent.transform, controlMenu.Control);
         }
 
         void ShowMenu(bool flag) => helpMenu.SetActive(flag);

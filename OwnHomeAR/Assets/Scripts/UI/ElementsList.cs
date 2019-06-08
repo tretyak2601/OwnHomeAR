@@ -70,6 +70,7 @@ namespace OwnHomeAR.UI
                     break;
                 case ElementEnum.Furniture:
                     FurnitureUI furUI = eUI as FurnitureUI;
+                    furniturePrefab = furUI.Model;
                     AR.Activate(true, furniturePrefab, furUI.Model);
                     break;
             }
